@@ -1,0 +1,149 @@
+#!/usr/bin/env php
+<?php
+
+use yii\helpers\Console;
+
+use mikehaertl\shellcommand\Command as ShellCommand;
+
+const INSTALL_PLUGINS = [
+    'mailgun',
+    'redactor',
+    'aws-s3',
+    'contact-form',
+    'super-table',
+    'sprout-fields',
+    'simplemap',
+    'expanded-singles',
+    'sitemap',
+    'environment-label',
+];
+
+// Set path constants
+define('CRAFT_BASE_PATH', __DIR__);
+define('CRAFT_VENDOR_PATH', CRAFT_BASE_PATH.'/vendor');
+
+// Load Composer's autoloader
+require_once CRAFT_VENDOR_PATH.'/autoload.php';
+
+// Load the .env file Craft created
+if (file_exists(CRAFT_BASE_PATH.'/.env')) {
+    $dotEnv = new Dotenv\Dotenv(CRAFT_BASE_PATH);
+    $dotEnv->load();
+}
+
+// By default, run the welcome script
+if (empty($argv[1])) {
+    welcome();
+} else {
+    // See what command we were passed in
+    switch ($argv[1]) {
+        case 'setup':
+            setup();
+            break;
+        default:
+            welcome();
+            break;
+    }
+}
+
+/**
+ * Display a welcome message
+ */
+function welcome()
+{
+    outputString(PHP_EOL.'To set up your Craft install, from your project directory, run:', Console::FG_YELLOW);
+    $script = './craft setup';
+    outputString(PHP_EOL.'    '.$script, Console::FG_GREEN);
+    outputString(PHP_EOL.'Then to set up custom settings, run:', Console::FG_YELLOW);
+    $script = './marlo setup';
+    outputString(PHP_EOL.'    '.$script, Console::FG_GREEN);
+    outputString(PHP_EOL.'Your setup is not complete until you run these two commands.', Console::FG_YELLOW);
+}
+
+/**
+ * Set up all the things!
+ */
+function setup()
+{
+    // Say hello
+    outputString(PHP_EOL.'Woof!', Console::FG_YELLOW);
+    // Install the default plugins
+    installPlugins();
+    // Say goodbye
+    outputString(PHP_EOL.'Setup complete!', Console::FG_YELLOW);
+}
+
+
+/**
+ * Install the default plugins
+ */
+function installPlugins()
+{
+    outputString(PHP_EOL.'Installing plugins', Console::FG_YELLOW);
+    $installPluginCmd = './craft install/plugin ';
+    foreach (INSTALL_PLUGINS as $pluginHandle) {
+        outputString('- installing plugin '.$pluginHandle);
+        executeShellCommand($installPluginCmd . $pluginHandle);
+    }
+}
+
+/**
+ * Output a string to the console, using optional $args to color it, if supported
+ *
+ * @param string $string
+ *
+ * @return mixed
+ */
+function outputString($string)
+{
+    $stream = \STDOUT;
+    if (Console::streamSupportsAnsiColors($stream)) {
+        $args = func_get_args();
+        array_shift($args);
+        $string = Console::ansiFormat($string, $args);
+    }
+
+    return Console::stdout($string.PHP_EOL);
+}
+
+/**
+ * Execute a shell command
+ *
+ * @param string $command
+ *
+ * @return string
+ */
+function executeShellCommand(string $command): string
+{
+    // Create the shell command
+    $shellCommand = new ShellCommand();
+    $shellCommand->setCommand($command);
+
+    // If we don't have proc_open, maybe we've got exec
+    if (!function_exists('proc_open') && function_exists('exec')) {
+        $shellCommand->useExec = true;
+    }
+
+    // Return the result of the command's output or error
+    if ($shellCommand->execute()) {
+        $result = $shellCommand->getOutput();
+    } else {
+        $result = $shellCommand->getError();
+    }
+
+    return $result;
+}
+
+/**
+ * Return whether a shell command exists ir not
+ *
+ * @param string $command
+ *
+ * @return bool
+ */
+function shellCommandExists(string $command): bool
+{
+    $result = executeShellCommand('which '.$command);
+
+    return !empty($result);
+}

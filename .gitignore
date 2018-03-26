@@ -1,0 +1,18 @@
+# Craft environment
+/.env
+
+# Craft license
+license.key
+
+# Composer
+/vendor
+
+# Assets
+/public/assets/*
+
+# Build files
+/node_modules
+
+# Misc files
+.cache
+.DS_Store
