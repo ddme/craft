@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Template alias
+- Closing nav tag
 
 ## 1.0.2 - 26/03/2018
 
