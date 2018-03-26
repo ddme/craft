@@ -1,6 +1,11 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.0.2 - 26/03/2018
+
+### Fixed
+- Composer version
+
 ## 1.0.1 - 26/03/2018
 
 ### Added
