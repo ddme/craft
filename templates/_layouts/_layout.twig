@@ -1,0 +1,33 @@
+{% set baseUrl = alias('@baseUrl') ~ '/' %}
+
+<!doctype html>
+<html lang="{{ craft.app.language|slice(0,2) }}">
+<head>
+
+  {% include "_partials/_global_header.twig" %}
+
+  <title></title>
+
+  <meta name="description" content="">
+
+  {% if craft.app.config.general.devMode %}
+    <meta name="robots" content="noindex, nofollow">
+  {% endif %}
+
+  <link rel="preload" href="{{ baseUrl }}dist/styles.css" as="style">
+  <link rel="stylesheet" href="{{ baseUrl }}dist/styles.css">
+</head>
+
+<body>
+  {% include "_partials/_info_header.twig" %}
+
+  {% block content %}
+  {% endblock %}
+
+  {% include "_partials/_info_footer.twig" %}
+
+  {% include "_partials/_global_footer.twig" %}
+
+  <script src="{{ baseUrl }}dist/bundle.js" defer></script>
+</body>
+</html>
