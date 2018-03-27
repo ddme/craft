@@ -1,5 +1,7 @@
 # Craft environment
-/.env
+.env.php
+.env.sh
+.env
 
 # Craft license
 license.key
@@ -7,11 +9,16 @@ license.key
 # Composer
 /vendor
 
+# Craft storage
+/storage/*
+!/storage/.gitkeep
+
 # Assets
 /public/assets/*
 
 # Build files
 /node_modules
+/npm-debug.log
 
 # Misc files
 .cache
