@@ -1,7 +1,12 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.0.4 - 27/03/2018
+
+### Fixed
+- Versioning issue
+
+## 1.0.3 - 27/03/2018
 
 ### Added
 - Minify & Typogrify plugins
