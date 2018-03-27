@@ -16,6 +16,8 @@ const INSTALL_PLUGINS = [
     'expanded-singles',
     'sitemap',
     'environment-label',
+    'minify',
+    'typogrify',
 ];
 
 // Set path constants

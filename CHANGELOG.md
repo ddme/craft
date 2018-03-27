@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+- Minify & Typogrify plugins
+
+### Changed
+- Honeypot version requirement
+
 ### Fixed
 - Template alias
 - Closing nav tag
