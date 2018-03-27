@@ -52,6 +52,6 @@
     ],
     "post-install-cmd": [
       "@php marlo update"
-]
+    ]
   }
 }
