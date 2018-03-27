@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Base error templates
+- Craft Scripts
 
 ### Changed
 - Prevents "Forgot Password" forms from revealing whether a valid email address was entered

@@ -25,7 +25,8 @@
     "topshelfcraft/environment-label": "^3.1.2",
     "craftcms/contact-form-honeypot": "^1.0.2",
     "nystudio107/craft-minify": "^1.2.8",
-    "nystudio107/craft-typogrify": "^1.1.9"
+    "nystudio107/craft-typogrify": "^1.1.9",
+    "nystudio107/craft-scripts": "^1.2.4"
   },
   "autoload": {
     "psr-4": {
@@ -43,7 +44,14 @@
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ],
     "post-create-project-cmd": [
-      "@php craft setup/welcome"
-    ]
+      "@php craft setup/welcome",
+      "@php marlo welcome"
+    ],
+    "post-update-cmd": [
+      "@php marlo update"
+    ],
+    "post-install-cmd": [
+      "@php marlo update"
+]
   }
 }
