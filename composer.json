@@ -1,7 +1,7 @@
 {
   "name": "ddme/craft",
   "description": "DDME Craft CMS Scaffolding",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": [
     "craft",
     "cms",
@@ -23,7 +23,9 @@
     "verbb/expanded-singles": "^1.0.3",
     "dolphiq/sitemap": "^v1.0.9",
     "topshelfcraft/environment-label": "^3.1.2",
-    "craftcms/contact-form-honeypot": "1.0.2"
+    "craftcms/contact-form-honeypot": "^1.0.2",
+    "nystudio107/craft-minify": "^1.2.8",
+    "nystudio107/craft-typogrify": "^1.1.9"
   },
   "autoload": {
     "psr-4": {
