@@ -30,6 +30,9 @@ return [
         // The length of time Craft will store data caches
         'cacheDuration' => 'P1W',
 
+        // Prevents "Forgot Password" forms from revealing whether a valid email address was entered
+        'preventUserEnumeration' => true,
+
         // If set to false, no updates will be updatable
         'allowUpdates' => false,
 

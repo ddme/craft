@@ -1,6 +1,14 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Added
+- Base error templates
+
+### Changed
+- Prevents "Forgot Password" forms from revealing whether a valid email address was entered
+
 ## 1.0.5 - 27/03/2018
 
 ### Fixed
