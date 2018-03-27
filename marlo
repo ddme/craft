@@ -10,6 +10,7 @@ const INSTALL_PLUGINS = [
     'redactor',
     'aws-s3',
     'contact-form',
+    'contact-form-honeypot',
     'super-table',
     'sprout-fields',
     'simplemap',

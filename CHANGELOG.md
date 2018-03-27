@@ -1,6 +1,11 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.0.5 - 27/03/2018
+
+### Fixed
+- Honeypot added to Marlo
+
 ## 1.0.4 - 27/03/2018
 
 ### Fixed
