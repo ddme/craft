@@ -14,17 +14,20 @@ mix.js('./src/vendor.js', './public/dist/bundle.js')
      .options({
        processCssUrls: false,
        postCss: [ tailwindcss('./tailwind.js') ],
-     })
-   .purgeCss({
-     enabled: true,
-     globs: [
-       path.join(__dirname, 'templates/**/*.{html,twig,svg}'),
-       path.join(__dirname, 'src/*.scss'),
-     ],
-     extractor: TailwindExtractor,
-     extensions: ['html', 'twig', 'js', 'php', 'scss', 'css', 'svg'],
-     whitelistPatterns: [
-       /cc-([A-z0-9-:\/]+)/,
-       /hf-([A-z0-9-:\/]+)/
-     ], // don't purge cookieconsent or form validation
-   });
+     });
+
+if (mix.config.production) {
+  mix.purgeCss({
+        enabled: true,
+        globs: [
+          path.join(__dirname, 'templates/**/*.{html,twig,svg}'),
+          path.join(__dirname, 'src/*.scss'),
+        ],
+        extractor: TailwindExtractor,
+        extensions: ['html', 'twig', 'js', 'php', 'scss', 'css', 'svg'],
+        whitelistPatterns: [
+          /cc-([A-z0-9-:\/]+)/,
+          /hf-([A-z0-9-:\/]+)/
+        ], // don't purge cookieconsent or form validation
+  });
+}
