@@ -1,7 +1,7 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.1.0 - 27/03/2018
+## Unreleased
 
 ### Changed
 - Only use PurgeCSS in production
