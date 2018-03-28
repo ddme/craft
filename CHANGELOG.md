@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## 1.1.0 - 27/03/2018
 
+### Changed
+- Only use PurgeCSS in production
+
+## 1.1.0 - 27/03/2018
+
 ### Added
 - Base error templates
 - Craft Scripts
