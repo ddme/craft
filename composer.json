@@ -11,7 +11,7 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "craftcms/cms": "^3.0.0-RC16",
+    "craftcms/cms": "^3.0.1",
     "vlucas/phpdotenv": "^2.4.0",
     "craftcms/mailgun": "^1.2.0",
     "craftcms/redactor": "^1.0.1",

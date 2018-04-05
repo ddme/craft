@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Environment label config
 
+### Changed
+- Updated required version of Craft
+
 ## 1.1.1 05/04/2018
 
 ### Changed
