@@ -1,6 +1,11 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Added
+- Environment label config
+
 ## 1.1.1 05/04/2018
 
 ### Changed
