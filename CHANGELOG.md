@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 - Craft Scripts
 
 ### Changed
-- Prevents "Forgot Password" forms from revealing whether a valid email address was entered
+- Prevent "Forgot Password" forms from revealing whether a valid email address was entered
 
 ## 1.0.5 - 27/03/2018
 
