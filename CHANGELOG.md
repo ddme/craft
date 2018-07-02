@@ -1,15 +1,16 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
-## Unreleased
-
-### Added
-- Environment label config
+## 1.2.0 - 02/07/2018
 
 ### Changed
-- Updated required version of Craft
+- Updated utilised plugins and packages
+- Updated templates
 
-## 1.1.1 05/04/2018
+### Removed
+- Craft scripts
+
+## 1.1.1 - 05/04/2018
 
 ### Changed
 - Only use PurgeCSS in production
