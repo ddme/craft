@@ -12,13 +12,13 @@ const INSTALL_PLUGINS = [
     'contact-form',
     'contact-form-honeypot',
     'super-table',
-    'sprout-fields',
     'simplemap',
     'expanded-singles',
     'sitemap',
-    'environment-label',
     'minify',
     'typogrify',
+    'twitter',
+    'craft-width-fieldtype',
 ];
 
 // Set path constants
