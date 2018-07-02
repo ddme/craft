@@ -1,6 +1,5 @@
-const mix = require('laravel-mix');
-var tailwindcss = require('tailwindcss');
-require('laravel-mix-purgecss');
+let mix = require('laravel-mix')
+require('laravel-mix-purgecss')
 
 // Custom PurgeCSS extractor for Tailwind that allows special characters in class names.
 class TailwindExtractor {
@@ -9,25 +8,17 @@ class TailwindExtractor {
   }
 }
 
-mix.js('./src/vendor.js', './public/dist/bundle.js')
-   .sass('./src/styles.scss', './public/dist/styles.css')
-     .options({
-       processCssUrls: false,
-       postCss: [ tailwindcss('./tailwind.js') ],
-     });
-
-if (mix.config.production) {
-  mix.purgeCss({
-        enabled: true,
-        globs: [
-          path.join(__dirname, 'templates/**/*.{html,twig,svg}'),
-          path.join(__dirname, 'src/*.scss'),
-        ],
-        extractor: TailwindExtractor,
-        extensions: ['html', 'twig', 'js', 'php', 'scss', 'css', 'svg'],
-        whitelistPatterns: [
-          /cc-([A-z0-9-:\/]+)/,
-          /hf-([A-z0-9-:\/]+)/
-        ], // don't purge cookieconsent or form validation
+mix.js('src/vendor.js', 'public/dist/bundle.js')
+  .sass('src/styles.scss', 'public/dist/styles.css')
+  .options({
+    processCssUrls: false,
+    postCss: [ require('tailwindcss')('tailwind.js') ],
+  })
+  .purgeCss({
+    globs: [
+      path.join(__dirname, 'templates/**/*.{html,twig}'),
+    ],
+    extractor: TailwindExtractor,
+    extensions: ['html', 'twig', 'js', 'css', 'scss'],
+    whitelistPatterns: [],
   });
-}
