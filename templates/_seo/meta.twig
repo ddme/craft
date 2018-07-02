@@ -1,0 +1,59 @@
+{% cache globally using key (entry.id ?? craft.app.request.pathInfo) ~ '_meta' %}
+	{% set optimisation = entry.optimisation ? entry.optimisation.one() : null %}
+
+	{% if optimisation %}
+		{% set browserTitle = (optimisation.browserTitle ?? entry.title) ~ (seo.browserTitleSuffix ? ' - ' ~ seo.browserTitleSuffix : '') %}
+		{% set metaDescription = optimisation.metaDescription ?? null %}
+
+		<title>{{ browserTitle }}</title>
+
+		{% if metaDescription %}
+		<meta name="description" content="{{ metaDescription }}">
+		{% endif %}
+	{% endif %}
+
+	{% set robots = entry.robots ?? null %}
+
+	{% if robots %}
+		{% if robots|length > 0 %}
+		<meta name="robots" content="{{ robots|join(', ') }}">
+		{% endif %}
+	{% endif %}
+
+	<link rel="home" href="{{ siteUrl }}">
+	<link rel="canonical" href="{{ craft.app.request.absoluteUrl }}">
+
+	{% set social = entry.social ? entry.social.with([':image']).one() : null %}
+
+	{% if social %}
+		{% set socialTitle = social.heading ?? browserTitle %}
+		{% set socialDescription = social.description ?? metaDescription %}
+		{% set fallbackImage = seo.socialImage.one() ?? null %}
+		{% set socialImage = social.image[0] ?? fallbackImage %}
+		{% set transform = {
+		    mode: 'fit',
+		    width: 800,
+				height: 600,
+				quality: 90,
+		} %}
+
+		{# Facebook #}
+		<meta property="og:url" content="{{ craft.app.request.absoluteUrl }}">
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="{{ currentSite.name }}">
+		<meta property="og:title" content="{{ socialTitle }}">
+		<meta property="og:description" content="{{ socialDescription }}">
+		{% if socialImage %}
+		<meta property="og:image" content="{{ socialImage.url(transform) }}">
+		{% endif %}
+
+		{# Twitter #}
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:url" content="{{ craft.app.request.absoluteUrl }}">
+		<meta name="twitter:title" content="{{ socialTitle }}">
+		<meta name="twitter:description" content="{{ socialDescription }}">
+		{% if socialImage %}
+		<meta name="twitter:image" content="{{ socialImage.url(transform) }}">
+		{% endif %}
+	{% endif %}
+{% endcache %}
