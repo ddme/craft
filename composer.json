@@ -44,12 +44,6 @@
     "post-create-project-cmd": [
       "@php craft setup/welcome",
       "@php marlo welcome"
-    ],
-    "post-update-cmd": [
-      "@php marlo update"
-    ],
-    "post-install-cmd": [
-      "@php marlo update"
     ]
   }
 }
