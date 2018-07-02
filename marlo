@@ -12,72 +12,13 @@ const INSTALL_PLUGINS = [
     'contact-form',
     'contact-form-honeypot',
     'super-table',
-    'sprout-fields',
     'simplemap',
     'expanded-singles',
     'sitemap',
-    'environment-label',
     'minify',
     'typogrify',
-];
-
-const CRAFT_SCRIPTS_SETUP = [
-    'srclink'      => 'vendor/nystudio107/craft-scripts/scripts',
-    'destlink'     => 'scripts',
-    'srcpath'      => 'scripts/craft3-example.env.sh',
-    'destpath'     => '.env.sh',
-    'replacements' => [
-        'GLOBAL_DB_TABLE_PREFIX=""' => [
-            'substr'  => '""',
-            'env'     => 'DB_TABLE_PREFIX',
-            'default' => '',
-        ],
-        'GLOBAL_DB_DRIVER="mysql"' => [
-            'substr'  => '"mysql"',
-            'env'     => 'DB_DRIVER',
-            'default' => 'mysql',
-        ],
-        'LOCAL_ROOT_PATH="REPLACE_ME"' => [
-            'substr'  => '"REPLACE_ME"',
-            'env'     => '',
-            'default' => '',
-        ],
-        'LOCAL_ASSETS_PATH=${LOCAL_ROOT_PATH}"REPLACE_ME"' => [
-            'substr'  => '"REPLACE_ME"',
-            'env'     => '',
-            'default' => 'public/assets/',
-        ],
-        'LOCAL_DB_NAME="REPLACE_ME"' => [
-            'substr'  => '"REPLACE_ME"',
-            'env'     => 'DB_DATABASE',
-            'default' => 'REPLACE_ME',
-        ],
-        'LOCAL_DB_PASSWORD="REPLACE_ME"' => [
-            'substr'  => '"REPLACE_ME"',
-            'env'     => 'DB_PASSWORD',
-            'default' => 'REPLACE_ME',
-        ],
-        'LOCAL_DB_USER="REPLACE_ME"' => [
-            'substr'  => '"REPLACE_ME"',
-            'env'     => 'DB_USER',
-            'default' => 'REPLACE_ME',
-        ],
-        'LOCAL_DB_HOST="localhost"' => [
-            'substr'  => '"localhost"',
-            'env'     => 'DB_SERVER',
-            'default' => 'localhost',
-        ],
-        'LOCAL_DB_PORT="3306"' => [
-            'substr'  => '"3306"',
-            'env'     => 'DB_PORT',
-            'default' => '3306',
-        ],
-        'LOCAL_DB_SCHEMA="public"' => [
-            'substr'  => '"public"',
-            'env'     => 'DB_SCHEMA',
-            'default' => 'public',
-        ],
-    ],
+    'twitter',
+    'craft-width-fieldtype',
 ];
 
 // Set path constants
@@ -126,27 +67,12 @@ function welcome()
 }
 
 /**
- * Update our Craft-Scripts symlinks as needed!
- */
-function update()
-{
-    // Say hello
-    outputString(PHP_EOL.'Updating marlo', Console::FG_YELLOW);
-    // Set up Craft-Scripts
-    setupCraftScripts();
-    // Say goodbye
-    outputString(PHP_EOL.'Update complete!', Console::FG_YELLOW);
-}
-
-/**
  * Set up all the things!
  */
 function setup()
 {
     // Say hello
     outputString(PHP_EOL.'Woof!', Console::FG_YELLOW);
-    // Set up Craft-Scripts
-    setupCraftScripts();
     // Install the default plugins
     installPlugins();
     // Install the NodeJS packages
@@ -155,8 +81,6 @@ function setup()
     initializeGit();
     // Run Webpack for the first time
     runLaravelMix();
-    // Symlink assets folder
-    symlinkAssetsFolder();
     // Say goodbye
     outputString(PHP_EOL.'Setup complete. Don\'t forget to import the database!', Console::FG_YELLOW);
 }
@@ -179,47 +103,6 @@ function runLaravelMix()
 {
     outputString(PHP_EOL.'Running Laravel Mix', Console::FG_YELLOW);
     executeShellCommand('npm run dev');
-}
-
-/**
- * Symlink the assets folder to storage
- */
-function symlinkAssetsFolder()
-{
-    outputString(PHP_EOL.'Symlinking Assets Folder', Console::FG_YELLOW);
-    // Make sure the storage/assets folder exists
-    executeShellCommand('mkdir -p storage/assets');
-    // Create the symlink
-    createSymLink('storage/assets', 'public/assets');
-}
-
-/**
- * Set up Craft-Scripts
- */
-function setupCraftScripts()
-{
-    // Set up Craft-Scripts if the file scripts/.env.sh doesn't exist already
-    outputString(PHP_EOL.'Setting up Craft-Scripts', Console::FG_YELLOW);
-    if (!file_exists('scripts/.env.sh')) {
-        $fileInfo = CRAFT_SCRIPTS_SETUP;
-        // Create the scripts symlink
-        createSymLink($fileInfo['srclink'], $fileInfo['destlink']);
-        if (!file_exists('.env.sh')) {
-            // Create the default .env.sh
-            if (copyFile($fileInfo['srcpath'], $fileInfo['destpath'])) {
-                $replacements = $fileInfo['replacements'];
-                if (!empty($replacements)) {
-                    // We need to swap in some dynamic variables for specific settings replacements
-                    $replacements['LOCAL_ROOT_PATH="REPLACE_ME"']['default'] = CRAFT_BASE_PATH.DIRECTORY_SEPARATOR;
-                    replaceInFile($fileInfo['destpath'], $replacements);
-                }
-            }
-        }
-        // Create the scripts/.env.sh symlink
-        createSymLink(CRAFT_BASE_PATH.DIRECTORY_SEPARATOR.'.env.sh', 'scripts/.env.sh');
-    } else {
-        outputString('### scripts/.env.sh file already exists, exiting...', Console::FG_RED);
-    }
 }
 
 /**
@@ -267,73 +150,6 @@ function outputString($string)
     }
 
     return Console::stdout($string.PHP_EOL);
-}
-
-/**
- * Create a symlink from $srcPath to $destPath
- *
- * @param string $srcPath
- * @param string $destPath
- *
- * @return bool
- */
-function createSymLink(string $srcPath, string $destPath)
-{
-    $result = @symlink($srcPath, $destPath);
-    if ($result) {
-        outputString('- created symlink from '.$srcPath.' to '.$destPath);
-    } else {
-        outputString('### error creating symlink from '.$srcPath.' to '.$destPath, Console::FG_RED);
-    }
-    return $result;
-}
-
-/**
- * Copy the $srcPath file to $destPath
- *
- * @param string $srcPath
- * @param string $destPath
- *
- * @return bool
- */
-function copyFile(string $srcPath, string $destPath)
-{
-    $result = @copy($srcPath, $destPath);
-    if ($result) {
-        outputString('- copied '.$srcPath.' to '.$destPath);
-    } else {
-        outputString('### error copying '.$srcPath.' to '.$destPath, Console::FG_RED);
-    }
-    return $result;
-}
-
-/**
- * Replace strings in $filePath and write out the modified file
- *
- * @param string $filePath
- * @param array  $replacements
- */
-function replaceInFile(string $filePath, array $replacements)
-{
-    if (!empty($replacements)) {
-        outputString('- setting up '.$filePath);
-        $fileContents = file_get_contents($filePath);
-        foreach ($replacements as $findValue => $params) {
-            $replaceValue = empty($params['env']) ? $params['default'] : getenv($params['env']) ?? $params['default'];
-            if (!empty($params['substr'])) {
-                $subStr = $params['substr'];
-                $wrapChar = '';
-                // If the $subStr is quoted, quote the $replaceValue, too
-                if ($subStr[0] == "'" || $subStr[0] == '"') {
-                    $wrapChar = $subStr[0];
-                }
-                $replaceValue = str_replace($subStr, $wrapChar.$replaceValue.$wrapChar, $findValue);
-            }
-            $fileContents = str_replace($findValue, $replaceValue, $fileContents);
-        }
-        // Write the file out
-        file_put_contents($filePath, $fileContents);
-    }
 }
 
 /**

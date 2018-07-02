@@ -1,0 +1,21 @@
+{% cache globally using key 'cookie_box' %}
+  {% set privacy = craft.entries.id(1).one() %}
+
+  <div class="fixed pin-b pin-l p-8 w-full max-w-md z-50" id="cookie_consent" style="display:none">
+    <div class="bg-white p-8 shadow-lg rounded">
+      <div class="text-sm text-grey-dark leading-normal">
+        We serve cookies on this site to analyse traffic, remember your preferences, and optimise your experience.
+      </div>
+      <div class="flex justify-end -mx-2 mt-4 text-sm">
+        {% if privacy %}
+          <div class="px-2">
+            <a class="block p-1 hover:bg-blue-lightest text-blue no-underline rounded" href="{{ privacy.url }}">See more details</a>
+          </div>
+        {% endif %}
+        <div class="px-2">
+          <div class="block p-1 hover:bg-blue-lightest text-blue no-underline rounded cursor-pointer" id="cookie_dismiss">OK</div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endcache %}

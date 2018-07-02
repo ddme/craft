@@ -1,7 +1,7 @@
 {
   "name": "ddme/craft",
   "description": "DDME Craft CMS Scaffolding",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "keywords": [
     "craft",
     "cms",
@@ -11,22 +11,20 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "craftcms/cms": "^3.0.0-RC16",
+    "craftcms/cms": "^3.0.0",
     "vlucas/phpdotenv": "^2.4.0",
     "craftcms/mailgun": "^1.2.0",
-    "craftcms/redactor": "^1.0.1",
+    "craftcms/redactor": "2.1.0",
     "craftcms/aws-s3": "^1.0.8",
     "craftcms/contact-form": "^2.1.1",
-    "verbb/super-table": "^2.0.4",
-    "barrelstrength/sprout-fields": "^3.0.3",
-    "ether/simplemap": "^3.3.3",
     "verbb/expanded-singles": "^1.0.3",
-    "dolphiq/sitemap": "^v1.0.9",
-    "topshelfcraft/environment-label": "^3.1.2",
     "craftcms/contact-form-honeypot": "^1.0.2",
     "nystudio107/craft-minify": "^1.2.8",
-    "nystudio107/craft-typogrify": "^1.1.9",
-    "nystudio107/craft-scripts": "^1.2.4"
+    "nystudio107/craft-typogrify": "1.1.11",
+    "ether/simplemap": "v3.3.3",
+    "verbb/super-table": "2.0.7",
+    "dukt/twitter": "^2.0.1",
+    "rias/craft-width-fieldtype": "1.0.5"
   },
   "autoload": {
     "psr-4": {
@@ -46,12 +44,6 @@
     "post-create-project-cmd": [
       "@php craft setup/welcome",
       "@php marlo welcome"
-    ],
-    "post-update-cmd": [
-      "@php marlo update"
-    ],
-    "post-install-cmd": [
-      "@php marlo update"
     ]
   }
 }
