@@ -1,7 +1,7 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.2.1 - 18/07/2018
 
 ### Fixed
 - SEO meta entry dependency
