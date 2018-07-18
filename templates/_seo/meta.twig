@@ -1,5 +1,5 @@
 {% cache globally using key (entry.id ?? craft.app.request.pathInfo) ~ '_meta' %}
-	{% set optimisation = entry.optimisation ? entry.optimisation.one() : null %}
+	{% set optimisation = entry is defined ? (entry.optimisation ? entry.optimisation.one() : null) : null %}
 
 	{% if optimisation %}
 		{% set browserTitle = (optimisation.browserTitle ?? entry.title) ~ (seo.browserTitleSuffix ? ' - ' ~ seo.browserTitleSuffix : '') %}
@@ -23,7 +23,7 @@
 	<link rel="home" href="{{ siteUrl }}">
 	<link rel="canonical" href="{{ craft.app.request.absoluteUrl }}">
 
-	{% set social = entry.social ? entry.social.with([':image']).one() : null %}
+	{% set social = entry is defined ? (entry.social ? entry.social.with([':image']).one() : null) : null %}
 
 	{% if social %}
 		{% set socialTitle = social.heading ?? browserTitle %}
