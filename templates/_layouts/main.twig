@@ -1,0 +1,42 @@
+{% minify %}
+
+{% set title = title|default(currentSite.name) %}
+{% set metaDescription = metaDescription|default(null) %}
+{% set robots = robots|default(null) %}
+
+<!doctype html>
+<html lang="{{ craft.app.language|slice(0,2) }}">
+<head>
+
+  {% include "_partials/global_header" %}
+
+  <title>{{ title }}</title>
+
+  {% if metaDescription %}
+    <meta name="description" content="{{ metaDescription }}">
+  {% endif %}
+
+  {% if robots %}
+    <meta name="robots" content="{{ robots }}">
+  {% endif %}
+
+  <link rel="home" href="{{ siteUrl }}">
+  <link rel="canonical" href="{{ craft.app.request.absoluteUrl }}">
+
+  <link rel="preload" href="{{ siteUrl ~ rev('dist/css/app.css') }}" as="style">
+  <link rel="stylesheet" href="{{ siteUrl ~ rev('dist/css/app.css') }}">
+</head>
+
+<body class="font-sans text-grey-darkest">
+  {% include "_partials/info_header" %}
+
+  {% block content %}{% endblock %}
+
+  {% include "_partials/info_footer" %}
+
+  {% include "_partials/cookie_box" %}
+
+  <script src="{{ siteUrl ~ rev('dist/js/bundle.js') }}"></script>
+</body>
+</html>
+{% endminify %}
