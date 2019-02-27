@@ -8,8 +8,8 @@ class TailwindExtractor {
   }
 }
 
-mix.js('src/vendor.js', 'public/dist/bundle.js')
-  .sass('src/styles.scss', 'public/dist/styles.css')
+mix.js('src/js/app.js', 'public/dist/js/app.js')
+  .sass('src/sass/app.scss', 'public/dist/css/app.css')
   .options({
     processCssUrls: false,
     postCss: [ require('tailwindcss')('tailwind.js') ],
