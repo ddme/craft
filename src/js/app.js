@@ -33,10 +33,6 @@ $('form').parsley({
   errorTemplate: '<div class="field-error"></div>',
 });
 
-$('#js-burger').on('click', function () {
-  $('#js-navigation').toggleClass('hidden');
-});
-
 $('input[type="checkbox"]').on('change', function() {
   $(this).parent().toggleClass('checked');
 });
@@ -45,10 +41,3 @@ $('input[type="radio"]').on('change', function() {
   $('input[type="radio"]:not(:checked)').parent().removeClass('checked');
   $('input[type="radio"]:checked').parent().addClass('checked');
 });
-
-import mask from 'jquery-mask-plugin';
-
-$('.input-date').mask('00/00/0000');
-$('.input-time').mask('00:00:00');
-$('.input-datetime').mask('00/00/0000 00:00:00');
-$('.input-phone').mask('00000 000000');

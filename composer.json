@@ -1,7 +1,7 @@
 {
   "name": "ddme/craft",
   "description": "DDME Craft CMS Scaffolding",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "keywords": [
     "craft",
     "cms",
@@ -11,20 +11,18 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "craftcms/cms": "^3.0.0",
-    "vlucas/phpdotenv": "^2.4.0",
-    "craftcms/mailgun": "^1.2.0",
-    "craftcms/redactor": "2.1.0",
-    "craftcms/aws-s3": "^1.0.8",
-    "craftcms/contact-form": "^2.1.1",
-    "verbb/expanded-singles": "^1.0.3",
-    "craftcms/contact-form-honeypot": "^1.0.2",
-    "nystudio107/craft-minify": "^1.2.8",
-    "nystudio107/craft-typogrify": "1.1.11",
-    "ether/simplemap": "v3.3.3",
-    "verbb/super-table": "2.0.7",
-    "dukt/twitter": "^2.0.1",
-    "rias/craft-width-fieldtype": "1.0.5"
+    "craftcms/cms": "^3.1",
+    "vlucas/phpdotenv": "^2.4",
+    "clubstudioltd/craft-asset-rev": "^6.0",
+    "craftcms/mailgun": "^1.4",
+    "craftcms/redactor": "^2.3",
+    "craftcms/aws-s3": "^1.2",
+    "craftcms/contact-form": "^2.2",
+    "lukeyouell/craft-sentry": "^1.5",
+    "nystudio107/craft-minify": "^1.2",
+    "nystudio107/craft-typogrify": "^1.1",
+    "ostark/craft-async-queue": "^2.0",
+    "verbb/expanded-singles": "^1.0"
   },
   "autoload": {
     "psr-4": {
@@ -32,16 +30,17 @@
     }
   },
   "config": {
-    "optimize-autoloader": true,
-    "platform": {
-      "php": "7.0"
-    }
+    "optimize-autoloader": true
   },
   "scripts": {
-    "post-root-package-install": [
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-    ],
     "post-create-project-cmd": [
+      "@php -r \"copy('.env.example', '.env');\"",
+      "@php -r \"unlink('composer.json');\"",
+      "@php -r \"unlink('CHANGELOG.md');\"",
+      "@php -r \"unlink('LICENSE.md');\"",
+      "@php -r \"unlink('README.md');\"",
+      "@php -r \"rename('composer.json.default', 'composer.json');\"",
+      "@composer dump-autoload -o",
       "@php craft setup/welcome",
       "@php marlo welcome"
     ]
