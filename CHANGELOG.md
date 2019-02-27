@@ -1,6 +1,26 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 - 27/02/2019
+
+### Added
+- Project cleanup after using `composer create-project`
+- Asset Rev plugin
+- AsyncQueue plugin
+- Sentry plugin
+
+### Changed
+- Source and distribution file locations
+- Updated NPM packages
+
+### Removed
+- jQuery Mask package
+- Simple Map plugin
+- Super Table plugin
+- Twitter plugin
+- Width Field Type plugin
+- Contact Form Honeypot plugin
+
 ## 1.2.1 - 18/07/2018
 
 ### Fixed
