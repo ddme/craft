@@ -1,6 +1,11 @@
 # DDME Craft Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 - 28/02/2018
+
+### Fixed
+- Build script was looking for `composer.json.default` instead of `composer.default.json`
+
 ## 2.0.0 - 27/02/2019
 
 ### Added
